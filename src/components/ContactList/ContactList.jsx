@@ -1,6 +1,6 @@
 import React from 'react';
 // import { useSelector, useDispatch } from 'react-redux';
-import { deleteThisContact, getContacts, getFilter } from '../../redux/contactsSlice'
+import { getFilter } from 'redux/contactsSlice'
 import ListItem from '../ListItem/ListItem';
 import { ListContacts } from './ContactList.styles';
 import { useGetContactsQuery } from 'redux/contactsSliceQ';
@@ -10,21 +10,20 @@ import { useSelector } from 'react-redux';
 const ContactList = () => {
   const { data, error, isLoading } = useGetContactsQuery();
 
-
   console.log('data:', data);
   console.log('error:', error);
   console.log('isLoading:', isLoading);
-  // const dispatch = useDispatch();
-  // const contacts = useSelector(getContacts);
+
   // const filter = useSelector(getFilter);
 
-  // const visibleContacts = data.filter(contact =>
-  //   contact.name.toLowerCase().includes(filter.toLowerCase()),
-  // )
 
-  // const deleteContact = contactId => {
-  //   dispatch(deleteThisContact(contactId))
+  // const visibleContacts = () => {
+  //   return data.filter(contact =>
+  //     contact.name.toLowerCase().includes(filter.toLowerCase()),
+  //   );
   // };
+
+  // const filteredContacts = visibleContacts();
 
   return (
     <ListContacts>
