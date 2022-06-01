@@ -10,7 +10,7 @@ export default function App() {
       <div>
         <p>Contacts</p>
         <Filter />
-        <ContactList />        
+        <ContactList />
       </div>
     </div>
   );  
