@@ -1,30 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import {
-//   persistStore,
-//   FLUSH,
-//   REHYDRATE,
-//   PAUSE,
-//   PERSIST,
-//   PURGE,
-//   REGISTER,
-// } from 'redux-persist';
-import { filterContacts } from './contactsSlice';
-import { contactsApi } from './contactsSliceQ';
-
-// const MyMiddleware = store => next => aaction => {
-//   console.log('Моя прослойка')
-// }
+import { filterSlice } from './filterSlice';
+import { contactsApi } from './contactsSlice';
 
 export const store = configureStore({
   reducer: {
-    contacts: filterContacts,
+    filter: filterSlice.reducer,
     [contactsApi.reducerPath]: contactsApi.reducer,
-    
   },
-  middleware: getDefaultMiddleware =>[
+  middleware: getDefaultMiddleware => [
     ...getDefaultMiddleware(),
     contactsApi.middleware,
   ],
 });
-
-// export const persistor = persistStore(store)

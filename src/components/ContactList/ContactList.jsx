@@ -1,34 +1,37 @@
 import React from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-import { getFilter } from 'redux/contactsSlice'
 import ListItem from '../ListItem/ListItem';
-import { ListContacts } from './ContactList.styles';
-import { useGetContactsQuery } from 'redux/contactsSliceQ';
 import { useSelector } from 'react-redux';
-// import propTypes from 'prop-types';
+import { getFilter } from 'redux/filterSlice';
+import { useGetContactsQuery } from 'redux/contactsSlice';
+import { SpinnerCircular } from 'spinners-react';
+import { ListContacts } from './ContactList.styles';
 
 const ContactList = () => {
-  const { data, error, isLoading } = useGetContactsQuery();
+  const { data: contacts = [], isLoading } = useGetContactsQuery();
 
-  console.log('data:', data);
-  console.log('error:', error);
-  console.log('isLoading:', isLoading);
+  const filter = useSelector(getFilter);
 
-  // const filter = useSelector(getFilter);
+  const visibleContacts = () => {
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase()),
+    );
+  };
 
-
-  // const visibleContacts = () => {
-  //   return data.filter(contact =>
-  //     contact.name.toLowerCase().includes(filter.toLowerCase()),
-  //   );
-  // };
-
-  // const filteredContacts = visibleContacts();
+  const filteredContacts = visibleContacts();
 
   return (
     <ListContacts>
-      {data &&
-        data.map(({ name, id, phone }) => (
+      {isLoading &&
+        <SpinnerCircular
+          size="40px"
+          secondaryColor="#B0C4DE"
+          style={{
+            margin: "20px",
+            color: '#191970',
+          }}
+        />}
+      {contacts &&
+        filteredContacts.map(({ name, id, phone }) => (
           <ListItem
             key={id}
             name={name}
@@ -40,10 +43,5 @@ const ContactList = () => {
     </ListContacts>
   );
 };
-
-// ContactList.propTypes = {
-//   visibleContacts: propTypes.arrayOf(propTypes.object),
-//   deleteContact: propTypes.func,
-// };
 
 export default ContactList;

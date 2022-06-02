@@ -1,17 +1,20 @@
 import ContactForm from './components/ContactForm/ContactForm';
 import ContactList from './components/ContactList/ContactList';
 import Filter from './components/Filter/Filter';
+import { ToastContainer } from 'react-toastify';
+import { Wrapper, Title } from './App.styles';
 
 export default function App() {
   return (
-    <div>
-      <h1>Phonebook</h1>
+    <Wrapper>
+      <ToastContainer autoClose={2500}/>
+      <Title>Phonebook</Title>
       <ContactForm />
       <div>
-        <p>Contacts</p>
+        <Title>Contacts</Title>
         <Filter />
         <ContactList />
       </div>
-    </div>
+    </Wrapper>
   );  
-}
+};

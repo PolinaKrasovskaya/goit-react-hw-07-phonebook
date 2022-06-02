@@ -1,25 +1,20 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useAddContactMutation } from 'redux/contactsSliceQ';
-import { useGetContactsQuery } from 'redux/contactsSliceQ';
-import { addNewContact, getContacts } from '../../redux/contactsSlice'
+import { useAddContactMutation } from 'redux/contactsSlice';
+import { useGetContactsQuery } from 'redux/contactsSlice';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   FormWrapper,
   InputLabel,
   FormInrut,
   SubmitButton,
 } from './ContactForm.styles';
-import { nanoid } from 'nanoid';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [addContact, {isLoading}] = useAddContactMutation();
   const { data } = useGetContactsQuery();
-  console.log(data)
-
-  // const dispatch = useDispatch();
-  // const contacts = useSelector(getContacts);
 
   const handleChange = event => {
     const { name, value } = event.currentTarget;
@@ -35,18 +30,17 @@ export default function ContactForm() {
         
       default:
         return;
-    }
-  }
+    };
+  };
 
   const onSubmitForm = e => {
     e.preventDefault();
 
     const newContact = {
-      // id: nanoid(),
       name,
       phone
-    }
-    onAddContact(newContact)
+    };
+    onAddContact(newContact);
     reset();
   };
 
@@ -54,11 +48,11 @@ export default function ContactForm() {
     const nameToFind = data.find(contact => contact.name.toLowerCase() === name.toLowerCase());
 
     if(nameToFind) {
-      alert(`${name} is already in contacts!`);
+      toast(`${name} is already in contacts!`);
     } else {
       addContact(contact);
     };
-  }
+  };
 
   const reset = () => {
     setName('');
@@ -91,7 +85,12 @@ export default function ContactForm() {
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
       />
-      <SubmitButton type="submit">Add contact</SubmitButton>
+      <SubmitButton
+        type="submit"
+        disabled={isLoading}
+      >
+        {isLoading ? 'Adding...' : 'Add contact'}
+      </SubmitButton>
     </FormWrapper>
-  )
-}
+  );
+};

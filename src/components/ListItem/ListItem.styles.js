@@ -11,6 +11,7 @@ export const ItemList = styled.li`
 export const ItemButton = styled.button`
     font-size: 14px;
     font-weight: 500;
+    width: 75px;
 
     color: #191970;
     background-color: white;

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const FormWrapper = styled.form`
     display: inline-flex;
     flex-direction: column;
-    min-width: 350px;
+    width: 350px;
     padding: 10px;
     border: 2px solid #191970;
     background-color: #F8F8FF;

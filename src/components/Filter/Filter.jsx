@@ -1,17 +1,16 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { filterContacts } from 'redux/contactsSlice';
+import { setFilter } from 'redux/filterSlice';
 import {
   FilterLabel,
   FilterInput,
 } from './Filter.styles';
-import propTypes from 'prop-types';
 
-const Filter = ({ value, onChange }) => {
+const Filter = () => {
   const dispatch = useDispatch();
 
   const changeFilter = event => {
-    dispatch(filterContacts(event.currentTarget.value))
+    dispatch(setFilter(event.currentTarget.value));
   };
 
   return (
@@ -19,16 +18,10 @@ const Filter = ({ value, onChange }) => {
       Find contacts by name
         <FilterInput
           type="text"
-          value={value}
           onChange={changeFilter}
         />
     </FilterLabel>
-  )
-}
-
-Filter.propTypes = {
-  value: propTypes.string,
-  onChange: propTypes.func,
+  );
 };
 
 export default Filter;

@@ -4,7 +4,7 @@ export const FilterLabel = styled.label`
     display: flex;
     flex-direction: column;
     margin-top: 5px;
-    padding: 10px;
+    padding-top: 10px;
     font-size: 18px;
     font-weight: 700;
     color: #191970
