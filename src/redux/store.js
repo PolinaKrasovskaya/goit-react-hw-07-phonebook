@@ -8,7 +8,7 @@ import { configureStore } from '@reduxjs/toolkit';
 //   PURGE,
 //   REGISTER,
 // } from 'redux-persist';
-import { contactsReducer } from './contactsSlice';
+import { filterContacts } from './contactsSlice';
 import { contactsApi } from './contactsSliceQ';
 
 // const MyMiddleware = store => next => aaction => {
@@ -17,7 +17,7 @@ import { contactsApi } from './contactsSliceQ';
 
 export const store = configureStore({
   reducer: {
-    contacts: contactsReducer,
+    contacts: filterContacts,
     [contactsApi.reducerPath]: contactsApi.reducer,
     
   },
